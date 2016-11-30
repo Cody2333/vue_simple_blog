@@ -1,0 +1,6 @@
+{
+  "extends": ["vue","eslint-config-airbnb"],
+  "rules": {
+    "no-new":0
+    }
+}
