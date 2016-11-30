@@ -5,34 +5,23 @@
       Coooody's Blog
     </div>
     <div id="nav_menu">
-      <a href="#" class="current"><i class="fa fa-home">
-        首页</i></a><a href="#"><i class="fa fa-archive">
-          归档</i></a><a href="#"><i class="fa fa-user">
-            关于</i></a>
+      <router-link to="/posts"><i class="fa fa-home">首页</i></router-link>
+      <router-link to="/archives"><i class="fa fa-archive">归档</i></router-link>
+      <router-link to="/about"><i class="fa fa-user">关于</i></router-link>
     </div>
-    <About />
-    <Posts />
+    <router-view></router-view>
   </div>
 </div>
 
 </template>
 
 <script>
-import About from './About.vue';
-import Posts from './Posts.vue';
-import PostDetail from './PostDetail.vue';
-
 export default {
   name: 'app',
   data() {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
-  },
-  components: {
-    About,
-    Posts,
-    PostDetail
   }
 }
 
@@ -51,7 +40,7 @@ html {
 }
 
 #site_name {
-  font-size: 2.8rem;
+  font-size: 3.5rem;
   padding: 2rem 0.5rem;
 }
 
@@ -61,7 +50,7 @@ html {
   border-bottom-color: #ddd;
 }
 
-.current {
+.router-link-active {
   border: 1px solid #ddd;
   border-bottom-color: transparent;
 }
@@ -83,7 +72,13 @@ a:hover {
 }
 
 @media (max-width: 480px) {
-  .current {
+  html {
+    font-size: 9px
+  }
+  a {
+    display: block;
+  }
+  .router-link-active {
     border-bottom-color: #ddd;
   }
 }

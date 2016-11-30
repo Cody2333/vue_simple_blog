@@ -1,15 +1,15 @@
 <template lang="html">
   <div>
-    this is post detail {{title}}
+    this is archives
   </div>
 </template>
 
 <script>
 export default {
-  name: 'post_detail',
+  name: 'posts',
   data() {
     return {
-      title: this.$route.params.title
+      msg: 'Welcome to Your Vue.js App'
     }
   }
 }
