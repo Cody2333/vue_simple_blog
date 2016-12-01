@@ -73,14 +73,15 @@ export default {
   padding: 5px 20px;
 }
 .more {
-  margin-top: 35px;
+  margin-top: 32px;
   color: #fff;
   font-size: 0.8rem;
-  padding: 3px 30px;
+  padding: 3px 26px;
   background-color: #444;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 
 }
+
 .list a {
   display: inline-block;
   margin: 0 auto;
@@ -90,18 +91,26 @@ export default {
   text-decoration: none;
 }
 
-.list a:hover {
+.list .title:hover {
   border-bottom-color: #444;
   background-color: transparent;
+}
+
+.readmore:hover {
+  border-bottom-color: transparent;
+}
+
+.more:hover {
+  background-color: #666;
 }
 </style>
 <style lang="css">
 .title {
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   padding: 10px 0;
 }
 .date {
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: #999;
   padding: 5px 20px;
 }

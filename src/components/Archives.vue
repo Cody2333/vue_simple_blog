@@ -73,6 +73,7 @@ export default {
 .date {
   display: inline-block;
   width: 20%;
+  font-size: 1rem;
 }
 
 .title {
