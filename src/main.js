@@ -5,6 +5,9 @@ import About from './About.vue';
 import PostDetail from './PostDetail.vue';
 import Posts from './Posts.vue';
 import Archives from './Archives.vue';
+import Admin from './Admin.vue';
+import Login from './components/admin/Login.vue';
+import List from './components/admin/List.vue';
 import {
   getPosts,
 } from './utils/utils';
@@ -28,6 +31,16 @@ const routes = [{
     path: '/detail/:id',
     name: 'detail',
     component: PostDetail,
+  }],
+}, {
+  path: '/admin',
+  component: Admin,
+  children: [{
+    path: '/admin/login',
+    component: Login,
+  }, {
+    path: '/admin/list',
+    component: List,
   }],
 }];
 

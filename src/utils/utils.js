@@ -2,6 +2,7 @@ import yaml from 'js-yaml';
 import { get,
   rawGet,
   rawPost,
+  autoLogin,
 } from './ajax';
 import config from './config';
 
@@ -32,6 +33,7 @@ function getPostById(id) {
       };
       rawGet(post.content.url).then((content) => {
         const doc = parseDocHeader(content);
+        myPost.title = doc.title;
         myPost.date = doc.date;
         myPost.description = doc.description;
         myPost.tags = doc.tags;
@@ -58,7 +60,7 @@ function getPosts(limit, skip) {
     s = (skip === undefined) ? s : `skip=${skip}`;
 
     const result = [];
-    get(`/classes/Articles?${l}&&${s}&&order=-updatedAt&&`).then((posts) => {
+    get(`/classes/Articles?${l}&&${s}&&order=-createdAt&&`).then((posts) => {
       for (const post of posts.results) {
         const myPost = {
           id: post.objectId,
@@ -67,11 +69,12 @@ function getPosts(limit, skip) {
 
         rawGet(post.content.url).then((content) => {
           const doc = parseDocHeader(content);
+          myPost.title = doc.title;
           myPost.date = doc.date;
           myPost.description = doc.description;
           myPost.tags = doc.tags;
           result.push(myPost);
-          resolve(result);
+          resolve(result.sort((a, b) => b.date.getTime() - a.date.getTime()));
         });
       }
     }).catch((err) => {
@@ -94,8 +97,9 @@ function getArchives() {
         rawGet(post.content.url).then((content) => {
           const doc = parseDocHeader(content);
           myPost.date = doc.date;
+          myPost.title = doc.title;
           result.push(myPost);
-          resolve(result);
+          resolve(result.sort((a, b) => b.date.getTime() - a.date.getTime()));
         });
       }
     }).catch((err) => {
@@ -105,8 +109,34 @@ function getArchives() {
   });
 }
 
+function login(username, password, type) {
+  return new Promise((resolve, reject) => {
+    if (type === 'autoLogin') {
+      if (window.localStorage.getItem('sessionToken') !== undefined) {
+        autoLogin('/users/me', window.localStorage.getItem('sessionToken')).then((res) => {
+          window.localStorage.setItem('username', res.username);
+          window.localStorage.setItem('sessionToken', res.sessionToken);
+          resolve(res);
+        }).catch((err) => {
+          reject(err);
+        });
+      } else {
+        reject('no user');
+      }
+    } else {
+      get(`/login?username=${username}&&password=${password}`).then((res) => {
+        window.localStorage.setItem('username', res.username);
+        window.localStorage.setItem('sessionToken', res.sessionToken);
+        resolve(res);
+      }).catch((err) => {
+        reject(err);
+      });
+    }
+  });
+}
 export {
   getPostById,
   getPosts,
   getArchives,
+  login,
 };

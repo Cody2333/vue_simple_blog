@@ -9,15 +9,15 @@
       <router-link to="/archives"><i class="fa fa-archive">归档</i></router-link>
       <router-link to="/about"><i class="fa fa-user">关于</i></router-link>
     </div>
-    <router-view></router-view>
   </div>
+  <router-view></router-view>
   <MyFooter/>
 </div>
 
 </template>
 
 <script>
-import MyFooter from './Footer.vue';
+import MyFooter from './components/Footer.vue';
 export default {
   name: 'app',
   data() {
@@ -73,6 +73,20 @@ html {
 
 #nav_menu a:hover {
   border-bottom-color: #444;
+  background-color: #ddd;
+}
+
+.btn {
+  display: block;
+  padding: 10px 30px;
+  margin: 0 auto;
+  color: #444;
+  font-size: 0.8rem;
+  background-color: transparent;
+  border: 1px solid #ddd;
+}
+
+.btn:hover {
   background-color: #ddd;
 }
 

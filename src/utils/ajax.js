@@ -22,9 +22,24 @@ function baseHttp(url, type, noPrefix) {
       'X-LC-Id': id,
       'X-LC-Key': key,
     },
+    contentType: 'application/json',
     dataType: 'json',
     crossDomain: true,
   };
+}
+
+export function autoLogin(url, sessionToken) {
+  return new Promise((resolve, reject) => {
+    const ajaxBody = baseHttp(url, 'get');
+    ajaxBody.headers = {
+      'X-LC-Id': id,
+      'X-LC-Key': key,
+      'X-LC-Session': sessionToken,
+    };
+    ajaxBody.success = resolve;
+    ajaxBody.error = reject;
+    $.ajax(ajaxBody);
+  });
 }
 
 export function rawGet(url) {
@@ -78,6 +93,18 @@ export function put(url, data) {
 export function del(url, data) {
   return new Promise((resolve, reject) => {
     const ajaxBody = baseHttp(url, 'delete');
+    ajaxBody.success = resolve;
+    ajaxBody.error = reject;
+    ajaxBody.data = data;
+    $.ajax(ajaxBody);
+  });
+}
+
+export function uploadText(url, data) {
+  return new Promise((resolve, reject) => {
+    const ajaxBody = baseHttp(url, 'post');
+    ajaxBody.contentType = 'text/plain';
+    ajaxBody.dataType = 'json';
     ajaxBody.success = resolve;
     ajaxBody.error = reject;
     ajaxBody.data = data;

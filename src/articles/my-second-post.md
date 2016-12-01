@@ -1,6 +1,6 @@
 ---
 title: my second post
-date: 2016-09-05 22:08:32
+date: 2016-09-05
 description: cody's second hexo blog articles
 tags:
 ---

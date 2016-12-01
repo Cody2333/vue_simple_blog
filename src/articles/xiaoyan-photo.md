@@ -1,6 +1,6 @@
 ---
 title: :) ~~~
-date: 2016-07-04 16:29:38
+date: 2016-07-04
 tags:
   - photo
 categories: photo
