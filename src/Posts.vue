@@ -10,8 +10,8 @@
 
     <div v-if="posts" class="content">
       <div class="list" v-for="post in posts">
-        <a href="#" class="post"> {{ post.title }} </a>
-        <div class="date"> {{post.date}} </div>
+        <router-link :to="{ name: 'detail', params: { id: post.id }}" class="title">{{post.title}}</router-link>
+        <div class="date"> {{post.date.toDateString()}} </div>
         <div class="description"> {{post.description}} </div>
 
       </div>
@@ -52,7 +52,7 @@ export default {
         this.posts = posts;
       }).catch((err) => {
         this.error = err;
-        console.err(err);
+        console.log(err);
       });
     }
   }
@@ -66,15 +66,6 @@ export default {
 .list {
   margin:30px auto;
 }
-.post {
-  font-size: 2.5rem;
-  padding: 10px 0;
-}
-.date {
-  font-size: 1rem;
-  color: #999;
-  padding: 5px 20px;
-}
 
 .description {
   font-size: 1rem;
@@ -82,8 +73,28 @@ export default {
   padding: 5px 20px;
 }
 
-a:hover {
+.list a {
+  display: inline-block;
+  margin: 0 auto;
+  line-height: 30px;
+  color: #444;
+  border: 1px solid transparent;
+  text-decoration: none;
+}
+
+.list a:hover {
   border-bottom-color: #444;
   background-color: transparent;
+}
+</style>
+<style lang="css">
+.title {
+  font-size: 2.5rem;
+  padding: 10px 0;
+}
+.date {
+  font-size: 1rem;
+  color: #999;
+  padding: 5px 20px;
 }
 </style>

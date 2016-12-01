@@ -1,20 +1,88 @@
 <template lang="html">
   <div>
-    this is archives
+    <div class="loading" v-if="loading">
+      Loading...
+    </div>
+
+    <div v-if="error" class="error">
+        something is wrong
+    </div>
+
+    <div v-if="posts" class="content">
+      <div class="list" v-for="post in posts">
+        <div class="date"> {{post.date.toDateString()}} </div>
+        <router-link :to="{ name: 'detail', params: { id: post.id }}" class="title">{{post.title}}</router-link>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import {
+  getArchives
+} from './utils/utils';
+
 export default {
-  name: 'posts',
+  name: 'archives',
+  created() {
+    this.fetchData();
+  },
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      loading: false,
+      posts: null,
+      error: null
+    }
+  },
+
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    '$route': 'fetchData'
+  },
+  methods: {
+    fetchData() {
+      this.error = this.posts = null;
+      this.loading = true;
+      getArchives().then((posts) => {
+        console.log("get archives info:");
+        console.log(posts);
+        this.loading = false;
+        this.posts = posts;
+      }).catch((err) => {
+        this.error = err;
+        console.log(err);
+      });
     }
   }
 }
 
 </script>
 
-<style lang="css">
+<style scoped lang="css">
+
+
+.list {
+  padding: 10px 10px;
+}
+.content {
+  margin-left: 80px;
+  text-align: left;
+
+}
+.date {
+  display: inline-block;
+}
+
+.title {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 1.4rem;
+  color: #444;
+  border: 1px solid transparent;
+  padding: 2px 0px;
+}
+
+a:hover {
+  border-bottom-color: #444;
+}
 </style>

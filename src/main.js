@@ -14,6 +14,7 @@ getPosts();
 const routes = [{
   path: '/',
   component: App,
+  redirect: '/posts',
   children: [{
     path: '/posts',
     component: Posts,
@@ -24,7 +25,8 @@ const routes = [{
     path: '/archives',
     component: Archives,
   }, {
-    path: '/detail/:title',
+    path: '/detail/:id',
+    name: 'detail',
     component: PostDetail,
   }],
 }];

@@ -35,6 +35,17 @@ export function rawGet(url) {
     $.ajax(ajaxBody);
   });
 }
+
+export function rawPost(url, data) {
+  return new Promise((resolve, reject) => {
+    const ajaxBody = rawHttp(url, 'post');
+    ajaxBody.success = resolve;
+    ajaxBody.error = reject;
+    ajaxBody.data = data;
+    $.ajax(ajaxBody);
+  });
+}
+
 export function get(url, noPrefix) {
   return new Promise((resolve, reject) => {
     const ajaxBody = baseHttp(url, 'get', noPrefix);

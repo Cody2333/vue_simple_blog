@@ -11,17 +11,22 @@
     </div>
     <router-view></router-view>
   </div>
+  <MyFooter/>
 </div>
 
 </template>
 
 <script>
+import MyFooter from './Footer.vue';
 export default {
   name: 'app',
   data() {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  components: {
+    MyFooter,
   }
 }
 
@@ -50,12 +55,12 @@ html {
   border-bottom-color: #ddd;
 }
 
-.router-link-active {
+#nav_menu .router-link-active {
   border: 1px solid #ddd;
   border-bottom-color: transparent;
 }
 
-a {
+#nav_menu a {
   display: inline-block;
   padding: 3px 30px;
   margin: 0 auto;
@@ -66,7 +71,7 @@ a {
   text-decoration: none;
 }
 
-a:hover {
+#nav_menu a:hover {
   border-bottom-color: #444;
   background-color: #ddd;
 }
@@ -75,10 +80,10 @@ a:hover {
   html {
     font-size: 9px
   }
-  a {
+  #nav_menu a {
     display: block;
   }
-  .router-link-active {
+  #nav_menu .router-link-active {
     border-bottom-color: #ddd;
   }
 }

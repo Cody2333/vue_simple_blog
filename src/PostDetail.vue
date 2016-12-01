@@ -1,20 +1,71 @@
 <template lang="html">
   <div>
-    this is post detail {{title}}
+    <div class="loading" v-if="loading">
+      Loading...
+    </div>
+
+    <div v-if="error" class="error">
+        something is wrong
+    </div>
+
+    <div v-if="post" class="content">
+      <div class="title">
+        {{post.title}}
+      </div>
+      <div class="date"> {{post.date.toDateString()}} </div>
+      <article class="markdown-body" v-html="post.parsedContent">
+      </article>
+    </div>
   </div>
 </template>
 
 <script>
+import {
+  getPostById
+} from './utils/utils';
 export default {
   name: 'post_detail',
+  created() {
+    this.fetchData();
+  },
   data() {
     return {
-      title: this.$route.params.title
+      loading: false,
+      post: null,
+      error: null
+    }
+  },
+
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    '$route': 'fetchData'
+  },
+  methods: {
+    fetchData() {
+      this.error = this.post = null;
+      this.loading = true;
+      getPostById(this.$route.params.id).then((post) => {
+        console.log("POST INFO:");
+        console.log(post);
+        this.loading = false;
+        this.post = post;
+      }).catch((err) => {
+        this.error = err;
+        console.log(err);
+      });
     }
   }
 }
 
 </script>
-
-<style lang="css">
+<style scoped lang="css">
+@import "./assets/github-markdown.css";
+.markdown-body {
+    box-sizing: border-box;
+    text-align: left;
+    min-width: 200px;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 45px;
+}
 </style>
