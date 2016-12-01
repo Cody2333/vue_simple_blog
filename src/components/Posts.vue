@@ -22,7 +22,7 @@
 <script>
 import {
   getPosts
-} from './utils/utils';
+} from '../utils/utils';
 export default {
   name: 'posts',
 

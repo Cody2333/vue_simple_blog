@@ -20,7 +20,7 @@
 <script>
 import {
   getArchives
-} from './utils/utils';
+} from '../utils/utils';
 
 export default {
   name: 'archives',

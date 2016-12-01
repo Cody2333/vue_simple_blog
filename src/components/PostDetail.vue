@@ -22,7 +22,7 @@
 <script>
 import {
   getPostById
-} from './utils/utils';
+} from '../utils/utils';
 export default {
   name: 'post_detail',
   created() {
@@ -59,7 +59,7 @@ export default {
 
 </script>
 <style scoped lang="css">
-@import "./assets/github-markdown.css";
+@import "../assets/github-markdown.css";
 .markdown-body {
     box-sizing: border-box;
     text-align: left;

@@ -28,6 +28,7 @@ export default {
         this.$router.push('/admin/list');
       }).catch((err) => {
         console.log(err);
+        alert(err.responseJSON.error);
       })
     },
     autologin() {
