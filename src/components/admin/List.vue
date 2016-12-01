@@ -1,20 +1,120 @@
 <template lang="html">
   <div>
-    this is about
+    <div class="loading" v-if="loading">
+      Loading...
+    </div>
+
+    <div v-if="error" class="error">
+        something is wrong
+    </div>
+
+    <div v-if="posts" class="content">
+      <div class="create">
+        <div>上传文章</div>
+        <input type ="file" name="file" @change="onFileChange"/>
+        <button type="button" name="button" class="btn" @click="uploadFile">上传</button>
+      </div>
+      <div class="list" v-for="post in posts">
+        <div class="date"> {{post.date.toDateString()}} </div>
+        <router-link :to="{ name: 'detail', params: { id: post.id }}" class="title">{{post.title}}</router-link>
+        <button class="btn">删除</button>
+        <button class="btn">编辑</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import {
+  getArchives
+} from '../../utils/utils';
+import {
+  uploadArticle
+} from '../../utils/tools';
+
 export default {
-  name: 'about',
+  created() {
+    this.fetchData();
+  },
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      loading: false,
+      posts: null,
+      error: null,
+      file: null
+    }
+  },
+
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    '$route': 'fetchData'
+  },
+  methods: {
+    fetchData() {
+      this.error = this.posts = null;
+      this.loading = true;
+      getArchives().then((posts) => {
+        console.log("get archives info:");
+        console.log(posts);
+        this.loading = false;
+        this.posts = posts;
+      }).catch((err) => {
+        this.error = err;
+        console.log(err);
+      });
+    },
+    uploadFile() {
+      uploadArticle(this.file).then((res) => {
+        console.log(res);
+        alert("上传成功");
+        this.fetchData();
+      })
+    },
+    onFileChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      this.file = files[0];
+      if (!files.length) return;
+      console.log(files[0]);
     }
   }
 }
 
 </script>
 
-<style lang="css">
+<style scoped lang="css">
+
+.btn {
+  float:right;
+}
+.list,
+.create {
+  padding: 10px 10px;
+  border: 1px solid transparent;
+  border-bottom-color: #ddd;
+}
+
+.create {
+  padding: 30px 10px;
+}
+.content {
+  margin-left: 80px;
+  text-align: left;
+
+}
+.date {
+  display: inline-block;
+}
+
+.title {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 1.4rem;
+  color: #444;
+  border: 1px solid transparent;
+  padding: 2px 0px;
+}
+
+a:hover {
+  border-bottom-color: #444;
+}
 </style>

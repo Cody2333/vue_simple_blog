@@ -6,8 +6,6 @@
     <router-link to="/admin/login" class="admin">
       Login
     </router-link>
-    <input type ="file" name="file" @change="onFileChange"/>
-    <button type="button" name="button" @click="uploadFile">上传</button>
   </div>
 </template>
 
@@ -19,22 +17,7 @@ import {
 export default {
   name: 'footer',
   data() {
-    return {
-      file: null
-    }
-  },
-
-  methods: {
-    uploadFile() {
-      uploadArticle(this.file);
-    },
-    onFileChange(e) {
-      var files = e.target.files || e.dataTransfer.files;
-      this.file = files[0];
-      if (!files.length) return;
-      console.log(files[0]);
-      //uploadArticle(files[0]);
-    }
+    return {}
   }
 }
 
