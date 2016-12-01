@@ -13,7 +13,7 @@
         <router-link :to="{ name: 'detail', params: { id: post.id }}" class="title">{{post.title}}</router-link>
         <div class="date"> {{post.date.toDateString()}} </div>
         <div class="description"> {{post.description}} </div>
-
+        <router-link :to="{ name: 'detail', params: { id: post.id }}" class="readmore"><div class="more">阅读全文</div></router-link>
       </div>
     </div>
   </div>
@@ -72,7 +72,15 @@ export default {
   color: #555;
   padding: 5px 20px;
 }
+.more {
+  margin-top: 35px;
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 3px 30px;
+  background-color: #444;
+  margin-bottom: 20px;
 
+}
 .list a {
   display: inline-block;
   margin: 0 auto;

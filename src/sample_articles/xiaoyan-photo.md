@@ -4,12 +4,11 @@ date: 2016-07-04
 tags:
   - photo
 categories: photo
-description: pictures of xiaoyan
+description: pictures
 ---
 
 ![1](http://imglf2.nosdn.127.net/img/ekhIbkNDdEhLQmNHYnkzY2VXUkpYdkVzSk1lcXZVTHJzbjU4bzlhTHAySUh2eGdOTk05ck1nPT0.jpg?imageView&thumbnail=2000y1333&type=jpg&quality=96&stripmeta=0&type=jpg)
 
-<!-- more -->
 
 ![2](http://imglf0.nosdn.127.net/img/ekhIbkNDdEhLQmNHYnkzY2VXUkpYb0FZOWJLNVMzU0s2V3RWenlsMExTeXJINVVLaStyR1JRPT0.jpg?imageView&thumbnail=2000y1333&type=jpg&quality=96&stripmeta=0&type=jpg)
 
