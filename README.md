@@ -3,6 +3,7 @@
 > simple blog built with vue2.0
 
 ## Introduction
+[demo](http://vueblog.cody.wang)
 
 ## Features
 - 用leancloud存文件，并且使用leancloud的rest api 做文件的读写
