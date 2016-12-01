@@ -66,11 +66,13 @@ export default {
 }
 .content {
   margin-left: 80px;
+  margin-top: 30px;
   text-align: left;
 
 }
 .date {
   display: inline-block;
+  width: 20%;
 }
 
 .title {

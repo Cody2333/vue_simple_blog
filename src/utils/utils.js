@@ -1,8 +1,11 @@
 import yaml from 'js-yaml';
-import { get,
+import {
+  get,
   rawGet,
   rawPost,
   autoLogin,
+  del,
+  put,
 } from './ajax';
 import config from './config';
 
@@ -134,9 +137,37 @@ function login(username, password, type) {
     }
   });
 }
+
+function deletePost(id) {
+  return new Promise((resolve, reject) => {
+    del(`/classes/Articles/${id}`).then((res) => {
+      resolve(res);
+    }).catch((err) => {
+      reject(err);
+    });
+  });
+}
+
+function patchPost(id, fileId) {
+  return new Promise((resolve, reject) => {
+    const data = {
+      content: {
+        id: fileId,
+        __type: 'File',
+      },
+    };
+    put(`/classes/Articles/${id}`, JSON.stringify(data)).then((res) => {
+      resolve(res);
+    }).catch((err) => {
+      reject(err);
+    });
+  });
+}
 export {
   getPostById,
   getPosts,
   getArchives,
   login,
+  deletePost,
+  patchPost,
 };

@@ -10,15 +10,17 @@
 
     <div v-if="posts" class="content">
       <div class="create">
-        <div>上传文章</div>
+        <div>上传新文章</div>
         <input type ="file" name="file" @change="onFileChange"/>
         <button type="button" name="button" class="btn" @click="uploadFile">上传</button>
       </div>
-      <div class="list" v-for="post in posts">
+      <div class="list" v-for="(post,index) in posts">
         <div class="date"> {{post.date.toDateString()}} </div>
         <router-link :to="{ name: 'detail', params: { id: post.id }}" class="title">{{post.title}}</router-link>
-        <button class="btn">删除</button>
-        <button class="btn">编辑</button>
+        <button class="btn" @click="del(post,index)">删除</button>
+        <button class="btn" @click="edit(post)">上传</button>
+        <input type ="file" class="input" name="file" @change="onFileChange"/>
+
       </div>
     </div>
   </div>
@@ -26,10 +28,13 @@
 
 <script>
 import {
-  getArchives
+  getArchives,
+  deletePost,
 } from '../../utils/utils';
+
 import {
-  uploadArticle
+  uploadArticle,
+  patchArticle
 } from '../../utils/tools';
 
 export default {
@@ -41,7 +46,7 @@ export default {
       loading: false,
       posts: null,
       error: null,
-      file: null
+      file: null,
     }
   },
 
@@ -75,6 +80,26 @@ export default {
       this.file = files[0];
       if (!files.length) return;
       console.log(files[0]);
+    },
+    del(post, index) {
+      deletePost(post.id).then((res) => {
+        alert("删除成功");
+        this.posts.splice(index, 1);
+      }).catch((err) => {
+        alert("删除出错");
+      });
+    },
+    edit(post) {
+      console.log(post);
+
+      patchArticle(this.file, post.id).then((res) => {
+        alert("修改成功");
+        this.fetchData();
+      }).catch((err) => {
+        console.log(err);
+        alert("修改出错");
+      });
+
     }
   }
 }
@@ -86,6 +111,15 @@ export default {
 .btn {
   float:right;
 }
+
+.input {
+  float:right;
+  vertical-align: middle;
+  margin-top: 10px;
+  padding: auto 0;
+}
+
+
 .list,
 .create {
   padding: 10px 10px;

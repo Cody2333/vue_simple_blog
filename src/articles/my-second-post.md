@@ -1,11 +1,11 @@
 ---
 title: my second post
-date: 2016-09-05
-description: cody's second hexo blog articles
+date: 2016-12-05
+description: cody's
 tags:
 ---
 
-## cody's second hexo blog
+## cody's second hexo blogdsafsdd
 
 #### for test
 
