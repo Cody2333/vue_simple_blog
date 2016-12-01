@@ -1,5 +1,7 @@
 .DS_Store
 node_modules/
 json/
+dist/
+config.js
 *.log
 .idea/

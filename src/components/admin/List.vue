@@ -18,8 +18,8 @@
         <div class="date"> {{post.date.toDateString()}} </div>
         <router-link :to="{ name: 'detail', params: { id: post.id }}" class="title">{{post.title}}</router-link>
         <button class="btn" @click="del(post,index)">删除</button>
-        <button class="btn" @click="edit(post)">上传</button>
-        <input type ="file" class="input" name="file" @change="onFileChange"/>
+        <button class="btn" @click="edit(post)" v-show="0">上传</button>
+        <input type ="file" class="input" name="file" @change="onFileChange" v-show="0"/>
 
       </div>
     </div>
