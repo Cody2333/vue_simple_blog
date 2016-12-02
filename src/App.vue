@@ -104,7 +104,7 @@ html {
 
 @media (max-width: 480px) {
   html {
-    font-size: 9px
+    font-size: 14px
   }
   #nav_menu a {
     display: block;
