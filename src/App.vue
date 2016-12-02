@@ -10,7 +10,9 @@
       <router-link to="/about"><i class="fa fa-user">关于</i></router-link>
     </div>
   </div>
-  <router-view></router-view>
+  <transition name="fade">
+    <router-view></router-view>
+  </transition>
   <MyFooter/>
 </div>
 
@@ -88,6 +90,16 @@ html {
 
 .btn:hover {
   background-color: #ddd;
+}
+
+.fade-enter-active,
+.fade-leave {
+  transition: opacity .5s
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
 }
 
 @media (max-width: 480px) {

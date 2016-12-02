@@ -1,7 +1,8 @@
 <template lang="html">
   <div class="posts">
     <div class="loading" v-if="loading">
-      Loading...
+      <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+      <span class="sr-only">Loading...</span>
     </div>
 
     <div v-if="error" class="error">
@@ -63,6 +64,7 @@ export default {
 </script>
 
 <style scoped lang="css">
+
 .list {
   margin:30px auto;
 }
@@ -114,4 +116,11 @@ export default {
   color: #999;
   padding: 5px 20px;
 }
+</style>
+<style>
+.loading {
+  vertical-align: middle;
+  margin-top: 90px;
+}
+
 </style>
